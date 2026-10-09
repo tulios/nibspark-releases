@@ -4,8 +4,7 @@ A keyboard-first app for your docs, written in plain Markdown.
 
 **Download it at [nibspark.app](https://nibspark.app)**, or pick a file from
 the [latest release](https://github.com/tulios/nibspark-releases/releases/latest).
-This repository holds nibspark's releases: the app itself is developed
-elsewhere.
+This repository holds nibspark's releases.
 
 ## Installing
 
@@ -21,9 +20,6 @@ Apple, so it opens like any app.
 nibspark for you alone, with no admin rights needed, and adds it to the Start
 menu; Settings > Apps uninstalls it. `nibspark-<version>-windows-x64.zip` is
 the app alone, to run from anywhere.
-
-They aren't signed yet: Windows may say "Windows protected your PC" the first
-time. Click **More info**, then **Run anyway**.
 
 ### Linux
 
