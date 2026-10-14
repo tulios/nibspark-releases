@@ -10,36 +10,65 @@ This repository holds nibspark's releases.
 
 ### macOS
 
-`nibspark-<version>.dmg`, for Apple silicon and Intel, macOS 11 or later.
+`nibspark-<version>.dmg`, universal for Apple silicon and Intel, macOS 11 or
+later.
 Open it and drag nibspark to Applications. It's signed and notarized by
-Apple, so it opens like any app.
+Apple.
 
 ### Windows
 
 `nibspark-<version>-setup.exe`, for x64, Windows 10 or later. It installs
 nibspark for you alone, with no admin rights needed, and adds it to the Start
-menu; Settings > Apps uninstalls it. `nibspark-<version>-windows-x64.zip` is
+menu. Settings > Apps uninstalls it. `nibspark-<version>-windows-x64.zip` is
 the app alone, to run from anywhere.
 
 ### Linux
 
-For x86_64, on Ubuntu 22.04, Debian 12, Arch, or anything as recent.
+The AppImage is the recommended way: it runs on any distribution, with every
+feature. One command downloads it, checks it against the release's checksum,
+and adds it to your app launcher, with no root needed:
 
-- **Ubuntu and Debian:** `nibspark_<version>-1_amd64.deb`
+```sh
+curl -fsSL https://nibspark.app/install.sh | sh
+```
+
+It works on x86_64 and ARM (aarch64), and nibspark updates itself from then
+on. [Review the script](https://nibspark.app/install.sh) before running it if
+you like. To uninstall:
+
+```sh
+curl -fsSL https://nibspark.app/install.sh | sh -s -- --uninstall
+```
+
+Or download `nibspark-x86_64.AppImage` (or `nibspark-aarch64.AppImage` for
+ARM) and run it by hand:
+
+```sh
+chmod +x nibspark-x86_64.AppImage
+./nibspark-x86_64.AppImage
+```
+
+#### Flatpak and Snap
+
+nibspark is also available as a Flatpak and a Snap. Because they're
+sandboxed, **the AI integration is disabled** in both: their sandboxes don't
+let nibspark run the agent installed on your computer.
+
+- **Flatpak**, from nibspark's own Flatpak repository (new to Flatpak?
+  [Set it up](https://flatpak.org/setup/) first):
 
   ```sh
-  sudo apt install ./nibspark_<version>-1_amd64.deb
+  flatpak install https://flatpak.nibspark.app/nibspark.flatpakref
   ```
 
-- **Arch and others:** `nibspark-<version>-linux-x86_64.tar.gz`, the app and
-  an `install.sh` that adds it to your apps:
+  Or open [the link](https://flatpak.nibspark.app/nibspark.flatpakref) in
+  GNOME Software or Discover. `flatpak update` keeps it up to date.
+
+- **Snap**, from the [Snap Store](https://snapcraft.io/nibspark) or Ubuntu's
+  App Center:
 
   ```sh
-  tar -xzf nibspark-<version>-linux-x86_64.tar.gz
-  cd nibspark-<version>-linux-x86_64
-  ./install.sh              # for you alone, in ~/.local
-  sudo ./install.sh --system  # or for everyone, in /usr/local
+  sudo snap install nibspark
   ```
 
-  `./install.sh --uninstall` removes it (with `--system` too, if installed for
-  everyone).
+  Snap keeps it up to date.
