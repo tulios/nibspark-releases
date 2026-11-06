@@ -126,11 +126,22 @@ can also add names of your own and use them elsewhere as `$name`.
 | `line_number_current` | The number of the cursor's line                      | `#e92d8a`   | `#ff5fa8`   |
 | `line_current`        | The tint on the cursor's line (use a low alpha)      | `#6c68d612` | `#9a96f214` |
 | `highlight`           | The marker under `==highlighted==` text              | `#ffe27a`   | `#6e5a14`   |
+| `find_match`          | Behind every match of find in the doc (use alpha)    | `#6c68d62e` | `#9a96f22e` |
+| `find_current`        | The current match's outline, and its fill at half    | `#6c68d6`   | `#8a86e6`   |
 | `syntax_keyword`      | Keywords in code                                     | `#4a44b0`   | `#9a96f2`   |
 | `syntax_string`       | Strings in code                                      | `#2f8063`   | `#4cb08b`   |
 | `syntax_literal`      | Names and numbers in code                            | `#333333`   | `#e6e4f6`   |
 | `syntax_comment`      | Comments in code                                     | `#716e8e`   | `#9a97b8`   |
 | `syntax_punctuation`  | Punctuation in code                                  | `#55526e`   | `#b8b5d0`   |
+
+`find_match` and `find_current` color find in the doc (⌘F), in the editor
+and the preview alike. Every match gets a box in `find_match` behind its
+text. The current match gets a 1px outline in `find_current`, and a box
+in `find_current` at half its strength, so it's told apart from comments'
+underlines and `==highlighted==` text by its shape as well as its color.
+A theme that leaves one out has it from its `accent`: `find_match` a
+quarter as strong as the accent, and `find_current` the accent itself.
+Unlike other colors, they don't fall back on the Default theme's.
 
 ### Named colors
 
@@ -189,9 +200,21 @@ for example. A theme without one looks the same in light and dark.
 - **Keep the surfaces close.** `sunken`, `background`, `surface` and
   `raised` are close shades of one another, a few percent of lightness
   apart, so cards look raised from the page.
-- **Use alpha where the table says so.** `line_current`, `shadow`,
-  `scrim` and `toolbar_track` are drawn over other colors. A solid
-  `line_current` hides the text's background.
+- **Use alpha where the table says so.** `line_current`, `find_match`,
+  `shadow`, `scrim` and `toolbar_track` are drawn over other colors. A
+  solid `line_current` or `find_match` hides the text's background.
+- **Find colors, to aim for:** `foreground` on `find_match` over
+  `background` at least 7:1 where your text has that to spare, and 4.5:1
+  over `code`; `foreground` on `find_current` at half strength over
+  `background` at least 4.5:1; and `find_current` against `background`
+  at least 3:1, for its outline. Keep `find_match` lighter than
+  `selection`, so other matches don't look selected, and a different hue
+  from `highlight`. A pale accent on a dark background usually needs a
+  deeper `find_current` than the accent for its text to read.
+- **A dark theme's `toolbar_track` stays in the dark.** Its light
+  version doesn't keep it: a shade made for a dark window greys out a
+  light one under dark icons. To have a track by day too, set a lighter
+  one in `[light.palette]`.
 - **Dark themes need lighter accents.** An accent that reads well on
   white is often too dark on near-black. Write the accents again in
   `[dark.palette]` or `[light.palette]`.
@@ -310,6 +333,25 @@ materials, backgrounds, text animations), and for its components, under
 nibspark-releases shows the presets and their keys. A preset can start
 from another of the same kind with `extends = "<name>"`. nibspark ignores
 keys it doesn't know in these two tables.
+
+### `[ui.markdown.preview]`
+
+How the preview and HTML export show the doc, beyond its typography.
+
+| Key                  | What it sets                                         |
+| -------------------- | ---------------------------------------------------- |
+| `heading_rules`      | Whether a line is drawn under the two biggest headings (`#` and `##`). `false` by default |
+| `image_captions`     | Whether images' descriptions show under them; on hover when `false`. `true` by default |
+| `caption_color`      | The color of images' descriptions                     |
+| `caption_scale`      | The size of images' descriptions, as a share of the text's |
+| `caption_spacing`    | The space between an image and its description, in points |
+| `find_color`         | The color of matches when finding in the preview. Wins over `find_match` |
+| `find_current_color` | The color of the current match. Wins over `find_current` |
+
+```toml
+[ui.markdown.preview]
+heading_rules = true
+```
 
 ## Following Omarchy
 
